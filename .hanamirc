@@ -1,0 +1,4 @@
+project=rover
+architecture=container
+test=rspec
+template=haml
