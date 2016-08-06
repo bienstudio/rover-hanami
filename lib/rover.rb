@@ -37,9 +37,10 @@ Hanami::Model.configure do
       entity      User
       repository  UserRepository
 
-      attribute :id,    Integer
-      attribute :name,  String
-      attribute :email, String
+      attribute :id,              Integer
+      attribute :name,            String
+      attribute :email,           String
+      attribute :password_digest, String
     end
 
     collection :trips do

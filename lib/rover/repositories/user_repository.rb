@@ -9,4 +9,13 @@ class UserRepository
   def self.find_by_email(email)
     query { where(email: email) }.first
   end
+
+  def self.authenticate(email:, password:)
+    user = find_by_email(email)
+
+    return nil unless user
+    return nil unless user.password?(password)
+
+    user
+  end
 end

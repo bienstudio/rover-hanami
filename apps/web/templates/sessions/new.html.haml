@@ -1,0 +1,8 @@
+%form{action: '/login', method: 'post'}
+  %input{type: 'hidden', name: '_csrf_token', value: csrf_token}
+  %p
+    %input{type: 'email', name: 'email'}
+  %p
+    %input{type: 'password', name: 'password'}
+  %p
+    %button{type: 'submit'} Login

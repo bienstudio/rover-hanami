@@ -4,4 +4,9 @@
     %title Web
     = favicon
   %body
+    - if current_user?
+      = current_user.name
+      = link_to 'Logout', routes.logout_path
+    - else
+      = link_to 'Login', routes.login_path
     = yield

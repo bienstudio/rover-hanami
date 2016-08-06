@@ -74,11 +74,34 @@ module Web
       #
       # See: http://www.rubydoc.info/gems/rack/Rack/Session/Cookie
       #
-      # sessions :cookie, secret: ENV['WEB_SESSIONS_SECRET']
+      sessions :cookie, secret: ENV['WEB_SESSIONS_SECRET']
 
       # Configure Rack middleware for this application
       #
       # middleware.use Rack::Protection
+      Warden::Manager.serialize_into_session do |user|
+        user.id
+      end
+
+      Warden::Manager.serialize_from_session do |id|
+        UserRepository.find(id)
+      end
+
+      Warden::Strategies.add(:password) do
+        def valid?
+          params[:email] || parmas[:password]
+        end
+
+        def authenticate!
+          user = UserRepository.authenticate(email: params[:email], password: params[:password])
+          user.nil? ? fail!('Could not log in') : success!(user)
+        end
+      end
+
+      middleware.use Warden::Manager do |manager|
+        manager.default_strategies :password
+        manager.failure_app = Web::Controllers::Sessions::Failure.new
+      end
 
       # Default format for the requests that don't specify an HTTP_ACCEPT header
       # Argument: A symbol representation of a mime type, default to :html
@@ -253,6 +276,8 @@ module Web
       controller.prepare do
         # include MyAuthentication # included in all the actions
         # before :authenticate!    # run an authentication before callback
+
+        include Rover::Authentication
       end
 
       # Configure the code that will yield each time Web::View is included

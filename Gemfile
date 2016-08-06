@@ -9,6 +9,9 @@ gem 'rake'
 
 gem 'pg'
 
+gem 'bcrypt'
+gem 'warden'
+
 gem 'haml'
 
 gem 'core_ext'
