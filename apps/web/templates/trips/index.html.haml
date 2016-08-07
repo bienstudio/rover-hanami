@@ -1,0 +1,4 @@
+%p= link_to 'New Trip', routes.new_trip_path
+%ul.trips
+  - trips.each do |trip|
+    %li= link_to trip.name, routes.trip_path(id: trip.id)

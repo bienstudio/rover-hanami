@@ -1,0 +1,13 @@
+%form{action: routes.users_path, method: 'post'}
+  %input{type: 'hidden', name: '_csrf_token', value: csrf_token}
+  %p
+    %label{for: 'user_name'} Name
+    %input{type: 'text', name: 'user[name]', id: 'user_name'}
+  %p
+    %label{for: 'user_email'} Email
+    %input{type: 'email', name: 'user[email]', id: 'user_email'}
+  %p
+    %label{for: 'user_password'} Password
+    %input{type: 'password', name: 'user[password]', id: 'user_password'}
+  %p
+    %button{type: 'Submit'} Join

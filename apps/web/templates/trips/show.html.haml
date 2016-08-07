@@ -1,0 +1,3 @@
+%h2= current_trip.name
+%p= link_to 'Edit', routes.edit_trip_path(id: current_trip.id)
+%p= "#{current_trip.start_date} &ndash; #{current_trip.end_date}"

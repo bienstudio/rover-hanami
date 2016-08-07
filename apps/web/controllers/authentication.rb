@@ -24,5 +24,11 @@ module Rover
     def authenticate!
       warden.authenticate!
     end
+
+    def require_authentication!
+      unless current_user?
+        redirect_to routes.login_path
+      end
+    end
   end
 end

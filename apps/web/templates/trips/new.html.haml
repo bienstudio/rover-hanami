@@ -1,0 +1,13 @@
+%form{action: routes.trips_path, method: 'post'}
+  %input{type: 'hidden', name: '_csrf_token', value: csrf_token}
+  %p
+    %label{for: 'trip_name'} Name
+    %input{type: 'text', name: 'trip[name]', id: 'trip_name'}
+  %p
+    %label{for: 'trip_start_date'} Start date
+    %input{type: 'date', name: 'trip[start_date]', id: 'trip_start_date'}
+  %p
+    %label{for: 'trip_end_date'} End date
+    %input{type: 'date', name: 'trip[end_date]', id: 'trip_end_date'}
+  %p
+    %button{type: 'Submit'} Create

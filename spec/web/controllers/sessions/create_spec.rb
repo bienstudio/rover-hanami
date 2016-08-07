@@ -19,7 +19,7 @@ RSpec.describe Web::Controllers::Sessions::Create do
       })
     end
 
-    it 'sets the Warden user' do
+    it 'sets the current user' do
       expect(warden).to receive(:set_user).with(user)
 
       response = action.call(params)
@@ -52,6 +52,26 @@ RSpec.describe Web::Controllers::Sessions::Create do
 
       expect(response[0]).to eq 302
       expect(response[1]['Location']).to eq '/login'
+    end
+  end
+
+  describe 'params' do
+    it 'returns 400 for invalid params' do
+      response = action.call({})
+
+      expect(response[0]).to eq 400
+    end
+
+    it 'rejects without an email' do
+      response = action.call({ user: {} })
+
+      expect(action.params.errors[:email]).to include 'is missing'
+    end
+
+    it 'rejects without a password' do
+      response = action.call({})
+
+      expect(action.params.errors[:password]).to include 'is missing'
     end
   end
 
