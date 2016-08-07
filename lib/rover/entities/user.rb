@@ -17,4 +17,24 @@ class User
   def password?(unencrypted)
     self.password == unencrypted
   end
+
+  def viewable_by?(_user)
+    self == _user
+  end
+
+  def creatable_by?(_user)
+    true
+  end
+
+  def updatable_by?(_user)
+    self == _user
+  end
+
+  def destroyable_by?(_user)
+    self == _user
+  end
+
+  def ==(_user)
+    self.email == _user.email
+  end
 end

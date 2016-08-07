@@ -19,4 +19,20 @@ class Trip
   def user=(_user)
     self.user_id = _user.id
   end
+
+  def viewable_by?(_user)
+    _user == user
+  end
+
+  def creatable_by?(_user)
+    true
+  end
+
+  def updatable_by?(_user)
+    _user == user
+  end
+
+  def destroyable_by?(_user)
+    _user == user
+  end
 end
